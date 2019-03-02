@@ -7,14 +7,14 @@ typedef struct {
 } Point;
 
 typedef struct {
-    point centre;
+    Point centre;
     double r;
 } Circle;
 
 typedef struct {
-    point a;
-    point b;
-    point c;
+    Point a;
+    Point b;
+    Point c;
 } Triangle;
 
 typedef struct {
@@ -22,5 +22,7 @@ typedef struct {
 
 double Perimeter_Circle(double r);
 double Areal_Circle(double r);
+void Get_figure(char arr[], char figure[]);
+int Counting_Figure(char* figure);
 
 #endif
