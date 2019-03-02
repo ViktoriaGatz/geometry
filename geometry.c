@@ -1,18 +1,17 @@
 #include "geometry.h"
 #include <math.h>
 #include <stdio.h>
-#define PI 3.14
 
-double P_circle(double r)
+double Perimeter_Circle(double r)
 {
-    double p = 2 * PI * r;
+    double p = 2 * M_PI * r;
     return p;
 }
 
-double S_circle(double r)
+double Areal_Circle(double r)
 {
-    double s = PI * r * r;
+    double s = M_PI * (r * r);
     return s;
 }
 
-void intersects()
+void Intersects(){}

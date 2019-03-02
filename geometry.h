@@ -4,24 +4,23 @@
 typedef struct {
     double x;
     double y;
-} point;
+} Point;
 
 typedef struct {
-    struct point centre;
+    point centre;
     double r;
-} circle;
+} Circle;
 
 typedef struct {
-    struct point a;
-    struct point b;
-    struct point c;
-    struct point a_finish;
-} triangle;
+    point a;
+    point b;
+    point c;
+} Triangle;
 
 typedef struct {
-} polygon;
+} Polygon;
 
-double P_circle(double r);
-double S_circle(double r);
+double Perimeter_Circle(double r);
+double Areal_Circle(double r);
 
 #endif
