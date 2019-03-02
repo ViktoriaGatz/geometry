@@ -22,7 +22,6 @@ typedef struct {
 
 double Perimeter_Circle(double r);
 double Areal_Circle(double r);
-void Get_figure(char arr[], char figure[]);
 int Counting_Figure(char* figure);
 
 #endif

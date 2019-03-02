@@ -11,16 +11,15 @@ int main()
         return 1;
     }
     char arr[256];
-    char figure[256];
+    //char figure[256];
     int i = 0;
     while ((arr[i] = fgetc(myfile)) != EOF) {
         i++;
     }
-    Get_figure(arr, figure);
-    printf("%s\n", figure);
-    int all = Counting_Figure(figure);
+    arr[i] = '\0';
+    int all = Counting_Figure(arr);
     if (all == 0) {
-        printf("Error input");
+        printf("Error input\n");
         return 1;
     }
     int triangle = all % 10;
@@ -29,7 +28,6 @@ int main()
            all,
            triangle,
            circle);
-    
     Circle cle = {{0, 0}, 1.5};
     double p = Perimeter_Circle(cle.r);
     double s = Areal_Circle(cle.r);

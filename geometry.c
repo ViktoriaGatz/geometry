@@ -13,21 +13,6 @@ double Areal_Circle(double r)
     double s = M_PI * (r * r);
     return s;
 }
-void Get_figure(char arr[], char figure[])
-{
-    int i = 0;
-    int n = 0;
-    while (arr[i] != EOF) {
-        if ((arr[i] >= 'a' && arr[i] <= 'z')
-            || (arr[i] >= 'A' && arr[i] <= 'Z')) {
-            figure[i] = arr[i];
-        }
-        n++;
-        i++;
-        figure[n] = ',';
-    }
-    figure[n + 1] = '\0';
-}
 
 int Counting_Figure(char* figure)
 {
