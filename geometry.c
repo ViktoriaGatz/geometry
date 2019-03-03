@@ -14,20 +14,24 @@ double Areal_Circle(double r)
     return s;
 }
 
-int Counting_Figure(char* figure)
+int Counting_Figure(char* A)
 {
-    int all = 0;
+    double all = 0;
     int i = 0;
-    while (figure[i] != '\0') {
-        if (figure[i] == 't') {
-            if (figure[i + 1] == 'r') {
-                if (figure[i + 2] == 'i') {
-                    if (figure[i + 3] == 'a') {
-                        if (figure[i + 4] == 'n') {
-                            if (figure[i + 5] == 'g') {
-                                if (figure[i + 6] == 'l') {
-                                    if (figure[i + 7] == 'e') {
-                                        all = all + 1;
+    double k = 10;
+    double j = 10;
+    double n = 0;
+    while (A[i] != '\0') {
+        if (A[i] == 't') {
+            if (A[i + 1] == 'r') {
+                if (A[i + 2] == 'i') {
+                    if (A[i + 3] == 'a') {
+                        if (A[i + 4] == 'n') {
+                            if (A[i + 5] == 'g') {
+                                if (A[i + 6] == 'l') {
+                                    if (A[i + 7] == 'e') {
+                                        all += 1000000000;
+                                        all += pow(j, n) * 100000;
                                     }
                                 }
                             }
@@ -35,21 +39,23 @@ int Counting_Figure(char* figure)
                     }
                 }
             }
-        } else if (figure[i] == 'c') {
-            if (figure[i + 1] == 'i') {
-                if (figure[i + 2] == 'r') {
-                    if (figure[i + 3] == 'c') {
-                        if (figure[i + 4] == 'l') {
-                            if (figure[i + 5] == 'e') {
-                                all = all + 10;
+        } else if (A[i] == 'c') {
+            if (A[i + 1] == 'i') {
+                if (A[i + 2] == 'r') {
+                    if (A[i + 3] == 'c') {
+                        if (A[i + 4] == 'l') {
+                            if (A[i + 5] == 'e') {
+                                all += 10000;
+                                all += pow(k, n);
                             }
                         }
                     }
                 }
             }
+        } else if (A[i] == '\n') {
+          n++;
         }
         i++;
     }
     return all;
 }
-//-S

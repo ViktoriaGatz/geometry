@@ -1,7 +1,7 @@
 FLAGS := -std=c99
 
 all: main.o geometry.o
-	gcc -Wall -Wextra main.o geometry.o -o main $(FLAGS)
+	gcc -Wall -Wextra main.o geometry.o -o main -lm $(FLAGS)
 main.o: main.c
 	gcc -Wall -Wextra -c main.c -o main.o $(FLAGS)
 IntVector.o: IntVector.c
