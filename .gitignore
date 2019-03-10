@@ -2,3 +2,6 @@
 main
 *.txt
 input*
+a.out
+struct*
+test*

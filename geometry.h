@@ -2,26 +2,13 @@
 #define GEOMETRY_H
 
 typedef struct {
-    double x;
-    double y;
-} Point;
-
-typedef struct {
-    Point centre;
-    double r;
-} Circle;
-
-typedef struct {
-    Point a;
-    Point b;
-    Point c;
-} Triangle;
-
-typedef struct {
-} Polygon;
+    char type[256];
+    double* coordinates;
+    int size;
+} Figure;
 
 double Perimeter_Circle(double r);
 double Areal_Circle(double r);
-int Counting_Figure(char* array);
+int Parser(Figure* new, char* A);
 
 #endif

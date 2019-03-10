@@ -1,6 +1,9 @@
 #include "geometry.h"
+#include <ctype.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 double Perimeter_Circle(double r)
 {
@@ -14,48 +17,44 @@ double Areal_Circle(double r)
     return s;
 }
 
-int Counting_Figure(char* A)
+int Parser(Figure* new, char* A)
 {
-    double all = 0;
+    char B[256];
     int i = 0;
-    double k = 10;
-    double j = 10;
-    double n = 0;
-    while (A[i] != '\0') {
-        if (A[i] == 't') {
-            if (A[i + 1] == 'r') {
-                if (A[i + 2] == 'i') {
-                    if (A[i + 3] == 'a') {
-                        if (A[i + 4] == 'n') {
-                            if (A[i + 5] == 'g') {
-                                if (A[i + 6] == 'l') {
-                                    if (A[i + 7] == 'e') {
-                                        all += 1000000000;
-                                        all += pow(j, n) * 100000;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else if (A[i] == 'c') {
-            if (A[i + 1] == 'i') {
-                if (A[i + 2] == 'r') {
-                    if (A[i + 3] == 'c') {
-                        if (A[i + 4] == 'l') {
-                            if (A[i + 5] == 'e') {
-                                all += 10000;
-                                all += pow(k, n);
-                            }
-                        }
-                    }
-                }
-            }
-        } else if (A[i] == '\n') {
-          n++;
-        }
+    while (A[i] >= 'a' && A[i] <= 'z') {
+        B[i] = A[i];
         i++;
     }
-    return all;
+    B[i] = '\0';
+    if (!(strcmp(B, "triangle"))) {
+        strcpy(new->type, B);
+    } else if (!(strcmp(B, "circle"))) {
+        strcpy(new->type, B);
+    } else {
+        printf("Unknown type\n");
+        return 1;
+    }
+    char* end;
+    end = A;
+    i = -1;
+    new->coordinates = (double*)malloc(sizeof(double) * 100);
+    if (new->coordinates == NULL) {
+        printf("Alloceted error");
+        return 1;
+    }
+    while (*A) {
+        new->coordinates[i] = strtod(A, &end);
+        A = end;
+        i++;
+        while (!(isdigit(*A) || *A == '-' || *A == '+') && *A) {
+            A++;
+        }
+    }
+    new->size = i;
+    /*new->coordinates = (double*)realloc(new->coordinates, sizeof(double) * i);
+    if (new->coordinates == NULL) {
+      printf("Alloceted error");
+      return 1;
+    }*/
+    return 0;
 }
