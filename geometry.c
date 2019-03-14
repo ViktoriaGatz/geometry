@@ -4,18 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-double Perimeter_Circle(double r)
-{
-    double p = 2 * M_PI * r;
-    return p;
-}
-
-double Areal_Circle(double r)
-{
-    double s = M_PI * (r * r);
-    return s;
-}
+#define TRIANGLE 1
+#define CIRCLE 2
 
 int Parser(Figure* new, char* A)
 {
@@ -27,9 +17,9 @@ int Parser(Figure* new, char* A)
     }
     B[i] = '\0';
     if (!(strcmp(B, "triangle"))) {
-        strcpy(new->type, B);
+        new->type = TRIANGLE;
     } else if (!(strcmp(B, "circle"))) {
-        strcpy(new->type, B);
+        new->type = CIRCLE;
     } else {
         printf("Unknown type\n");
         return 1;
@@ -51,10 +41,28 @@ int Parser(Figure* new, char* A)
         }
     }
     new->size = i;
-    /*new->coordinates = (double*)realloc(new->coordinates, sizeof(double) * i);
-    if (new->coordinates == NULL) {
-      printf("Alloceted error");
-      return 1;
-    }*/
     return 0;
+}
+
+void S_And_P_Circle(double* S, double* P, Figure* new)
+{
+    double r = new->coordinates[2];
+    *S = M_PI * (r * r);
+    *P = 2 * M_PI * r;
+}
+
+void S_And_P_Triangle(double* S, double* P, Figure* new)
+{
+    double a
+            = sqrt(pow((new->coordinates[2] - new->coordinates[0]), 2.0)
+                   + pow((new->coordinates[3] - new->coordinates[1]), 2.0));
+    double b
+            = sqrt(pow((new->coordinates[4] - new->coordinates[2]), 2.0)
+                   + pow((new->coordinates[5] - new->coordinates[3]), 2.0));
+    double c
+            = sqrt(pow((new->coordinates[0] - new->coordinates[4]), 2.0)
+                   + pow((new->coordinates[1] - new->coordinates[5]), 2.0));
+    *P = a + b + c;
+    double p = (a + b + c) / 2;
+    *S = sqrt(p * (p - a) * (p - b) * (p - c));
 }

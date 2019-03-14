@@ -2,13 +2,13 @@
 #define GEOMETRY_H
 
 typedef struct {
-    char type[256];
+    int type;
     double* coordinates;
     int size;
 } Figure;
 
-double Perimeter_Circle(double r);
-double Areal_Circle(double r);
 int Parser(Figure* new, char* A);
+void S_And_P_Circle(double* S, double* P, Figure* new);
+void S_And_P_Triangle(double* S, double* P, Figure* new);
 
 #endif
