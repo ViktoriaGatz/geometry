@@ -1,6 +1,5 @@
 *.o
 main
-*.txt
 input*
 a.out
 struct*
