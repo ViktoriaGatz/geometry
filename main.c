@@ -14,6 +14,7 @@ int main()
         printf("No file\n");
         return 1;
     }
+    printf("You input:\n");
     int capacity = 100;
     int size = 0;
     char arr[256];
