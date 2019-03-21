@@ -3,11 +3,10 @@
 
 typedef struct {
     int type;
-    double* coordinates;
+    double c[40];
     int size;
 } Figure;
 
-int Parser(Figure* new, char* A);
 void S_And_P_Circle(double* S, double* P, Figure* new);
 void S_And_P_Triangle(double* S, double* P, Figure* new);
 

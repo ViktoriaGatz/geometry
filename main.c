@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include "parser.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,7 @@ int main()
         if (size < capacity) {
             if (arr[i - 1] == '\n') {
                 arr[i - 1] = '\0';
+                First_Character(arr);
                 Parser(&new[size], arr);
                 size++;
                 i = 0;
@@ -41,7 +43,6 @@ int main()
             }
         }
     }
-    int j;
     for (i = 0; i < size; i++) {
         double S, P;
         if (new[i].type == CIRCLE) {
@@ -53,11 +54,11 @@ int main()
             S_And_P_Triangle(&S, &P, &new[i]);
             printf("S = %.3f\nP = %.3f\n", S, P);
         }
-        j = 0;
+        /*int j = 0;
         while (j < new[i].size) {
-            printf("coordinat %d: %.2f\n", j + 1, new[i].coordinates[j]);
+            printf("coordinat %d: %.2f\n", j + 1, new[i].c[j]);
             j++;
-        }
+        }*/
     }
     return 0;
 }
