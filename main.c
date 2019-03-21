@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TRIANGLE 1
-#define CIRCLE 2
 
 int main()
 {

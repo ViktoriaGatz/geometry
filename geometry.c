@@ -6,9 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 #define M_PI 3.14159265358979323846
-#define TRIANGLE 1
-#define CIRCLE 2
-#define POINT 3
 
 void S_And_P_Circle(double* S, double* P, Figure* new)
 {
