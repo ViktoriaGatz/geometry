@@ -29,7 +29,7 @@ int main()
                 arr[i - 1] = '\0';
                 printf("-----str %d-----\n", size + 1);
                 if (!(First_Character(arr)) && !(Parser(&new[size], arr))) {
-                  Work(&new[size]);
+                    Work(&new[size]);
                 }
                 size++;
                 i = 0;
