@@ -1,4 +1,3 @@
-
 #include "geometry.h"
 #include "parser.h"
 #include <ctype.h>
