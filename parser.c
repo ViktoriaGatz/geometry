@@ -106,13 +106,15 @@ int Punctuation(char* arr)
     if (arr[i] == '(') {
       if (arr[i + 1] == '(') {
         done = 1;
-        Extra_sumbol(arr, (i + 1));
-        Punctuation_for_triangle(arr, (i + 1));
+        if (Extra_sumbol(arr, (i + 1)) || Punctuation_for_triangle(arr, (i + 1))) {
+          return 1;
+        }
         return 0;
       } else {
         done = 1;
-        Extra_sumbol(arr, i);
-        Punctuation_for_circle(arr, i);
+        if (Extra_sumbol(arr, i) || Punctuation_for_circle(arr, i)) {
+          return 1;
+        }
         return 0;
       }
     }
@@ -127,7 +129,9 @@ int Punctuation(char* arr)
 int First_Character(char* arr)
 {
   if (arr[0] > 'a' && arr[0] < 'z') {
-    Punctuation(arr);
+    if (Punctuation(arr)) {
+      return 1;
+    }
   } else {
     printf("Error in the first character.\n");
   }

@@ -7,6 +7,31 @@
 #include <string.h>
 #define M_PI 3.14159265358979323846
 
+void Work(Figure* new)
+{
+      double S, P;
+      if (new->type == CIRCLE) {
+          printf("Figure circle\n");
+          S_And_P_Circle(&S, &P, new);
+          printf("S = %.3f\nP = %.3f\n", S, P);
+      } else if (new->type == TRIANGLE) {
+          printf("Figure triangle\n");
+          S_And_P_Triangle(&S, &P, new);
+          printf("S = %.3f\nP = %.3f\n", S, P);
+          printf("Coordinats:\n");
+      }
+      Print_Coordinats(new);
+}
+
+void Print_Coordinats(Figure* new)
+{
+  int j = 0;
+  while (j < new->size) {
+      printf("%d: %.2f\n", j + 1, new->c[j]);
+      j++;
+  }
+}
+
 void S_And_P_Circle(double* S, double* P, Figure* new)
 {
     double r = new->c[2];

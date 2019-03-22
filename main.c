@@ -27,8 +27,10 @@ int main()
         if (size < capacity) {
             if (arr[i - 1] == '\n') {
                 arr[i - 1] = '\0';
-                First_Character(arr);
-                Parser(&new[size], arr);
+                printf("-----str %d-----\n", size + 1);
+                if (!(First_Character(arr)) && !(Parser(&new[size], arr))) {
+                  Work(&new[size]);
+                }
                 size++;
                 i = 0;
             }
@@ -40,23 +42,6 @@ int main()
                 return 1;
             }
         }
-    }
-    for (i = 0; i < size; i++) {
-        double S, P;
-        if (new[i].type == CIRCLE) {
-            printf("Figure circle\n");
-            S_And_P_Circle(&S, &P, &new[i]);
-            printf("S = %.3f\nP = %.3f\n", S, P);
-        } else if (new[i].type == TRIANGLE) {
-            printf("Figure triangle\n");
-            S_And_P_Triangle(&S, &P, &new[i]);
-            printf("S = %.3f\nP = %.3f\n", S, P);
-        }
-        /*int j = 0;
-        while (j < new[i].size) {
-            printf("coordinat %d: %.2f\n", j + 1, new[i].c[j]);
-            j++;
-        }*/
     }
     return 0;
 }

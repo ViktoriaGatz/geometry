@@ -1,5 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
+#include "geometry.h"
 
 int Parser(Figure* new, char* A);
 int Coordinats(Figure* new, char* A);
