@@ -1,14 +1,15 @@
 FLAGS := -std=c99
+SRC_DIR := ./src
 
-all: prog
-prog: main.o geometry.o parser.o
-	gcc -Wall -Wextra main.o geometry.o parser.o -o main -lm $(FLAGS)
-main.o: main.c
-	gcc -Wall -Wextra -c main.c -o main.o $(FLAGS)
-geometry.o: geometry.c
-		gcc -Wall -Wextra -c geometry.c -o geometry.o -lm $(FLAGS)
-parser.o: parser.c
-		gcc -Wall -Wextra -c parser.c -o parser.o $(FLAGS)
+all: $(SRC_DIR)prog
+$(SRC_DIR)prog:  $(SRC_DIR)/main.o  $(SRC_DIR)/geometry.o  $(SRC_DIR)/parser.o
+	gcc -Wall -Wextra  $(SRC_DIR)/main.o  $(SRC_DIR)/geometry.o  $(SRC_DIR)/parser.o -o main -lm $(FLAGS)
+$(SRC_DIR)main.o: $(SRC_DIR)main.c
+	gcc -Wall -Wextra -c  $(SRC_DIR)/main.c -o  $(SRC_DIR)/main.o $(FLAGS)
+$(SRC_DIR)geometry.o: $(SRC_DIR)geometry.c
+		gcc -Wall -Wextra -c  $(SRC_DIR)/geometry.c -o  $(SRC_DIR)/geometry.o -lm $(FLAGS)
+$(SRC_DIR)parser.o: $(SRC_DIR)parser.c
+	gcc -Wall -Wextra -c  $(SRC_DIR)/parser.c -o  $(SRC_DIR)/parser.o $(FLAGS)
 
 clean:
 	rm -f *.o
