@@ -8,7 +8,7 @@
 int main()
 {
     FILE* myfile;
-    myfile = fopen("myfile.txt", "r");
+    myfile = fopen("./example/myfile.txt", "r");
     if (myfile == NULL) {
         printf("No file\n");
         return 1;
