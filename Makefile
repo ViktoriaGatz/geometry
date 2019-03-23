@@ -2,11 +2,11 @@ SRC_DIR := ./src
 BIN_DIR := ./bin
 OBJ_DIR := ./obj
 
-all: $(SRC_DIR)/prog
+all: $(BIN_DIR)/geometry
 
 
-$(SRC_DIR)/prog:  $(OBJ_DIR)/main.o  $(OBJ_DIR)/geometry.o  $(OBJ_DIR)/parser.o
-	gcc -Wall -Wextra  $(OBJ_DIR)/main.o  $(OBJ_DIR)/geometry.o  $(OBJ_DIR)/parser.o -o $(BIN_DIR)/main -lm
+$(BIN_DIR)/geometry:  $(OBJ_DIR)/main.o  $(OBJ_DIR)/geometry.o  $(OBJ_DIR)/parser.o
+	gcc -Wall -Wextra  $(OBJ_DIR)/main.o  $(OBJ_DIR)/geometry.o  $(OBJ_DIR)/parser.o -o $(BIN_DIR)/geometry -lm
 
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.c
@@ -21,5 +21,11 @@ $(OBJ_DIR)/parser.o: $(SRC_DIR)/parser.c
 	gcc -Wall -Wextra -c  $(SRC_DIR)/parser.c -o  $(OBJ_DIR)/parser.o
 
 clean:
-	rm -f *.o
-	rm -f main
+	find -name "*.o" -exec rm -rf {} +
+	rm -rf ./bin/main
+
+install:
+	sudo cp ./bin/geometry /usr/bin/geometry
+
+uninstall:
+	sudo rm -f /usr/bin/geometry
