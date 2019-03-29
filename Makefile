@@ -23,7 +23,7 @@ $(OBJ_DIR)/parser.o: $(SRC_DIR)/parser.c
 
 clean:
 	find -name "*.o" -exec rm -rf {} +
-	rm -rf ./bin/main
+	rm -rf ./bin/geometry
 
 install:
 	sudo cp ./bin/geometry /usr/bin/geometry
