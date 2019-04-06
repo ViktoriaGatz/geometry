@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD:parser.c
-=======
-#include "geometry.h"
->>>>>>> Add src:src/parser.c
-=======
->>>>>>> Fix code style
 #include "parser.h"
 #include "geometry.h"
 #include <ctype.h>
@@ -51,41 +44,15 @@ int Coordinats(Figure* new, char* A)
     return 0;
 }
 
-int Extra_minus(char* arr, int i)
-{
-    for (int j = i; arr[j] != '\0'; j++) {
-        if (arr[j] == '-' && arr[j + 1] == '-') {
-            printf("Double '-'\n");
-            return 1;
-        }
-    }
-    return 0;
-}
-
-int Extra_point(char* arr, int i)
-{
-    for (int j = i; arr[j] != '\0'; j++) {
-        if (arr[j] == '.' && arr[j + 1] == '.') {
-            printf("Double '.'\n");
-            return 1;
-        }
-    }
-    return 0;
-}
-
 int Extra_sumbol(char* arr, int i)
 {
     for (int j = i; arr[j] != '\0'; j++) {
         if (arr[j] > 'a' && arr[j] < 'z') {
-            printf("Extra symbol\n");
+            printf("Extra sumbol\n");
             return 1;
         }
     }
-    if (Extra_point(arr, i) || Extra_minus(arr, i)) {
-        return 1;
-    } else {
-        return 0;
-    }
+    return 0;
 }
 
 int Punctuation_for_triangle(char* arr, int i)
