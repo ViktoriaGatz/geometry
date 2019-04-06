@@ -1,68 +1,73 @@
 #include "geometry.h"
+#include "parser.h"
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TRIANGLE 1
-#define CIRCLE 2
+#define M_PI 3.14159265358979323846
 
-int Parser(Figure* new, char* A)
+void Work(Figure* new)
 {
-    char B[256];
-    int i = 0;
-    while (A[i] >= 'a' && A[i] <= 'z') {
-        B[i] = A[i];
-        i++;
+    double S, P;
+    double a, b, c;
+    if (new->type == CIRCLE) {
+        printf("Figure circle\n");
+        S_Circle(&S, new);
+        P_Circle(&P, new);
+        printf("S = %.3f\nP = %.3f\n", S, P);
+    } else if (new->type == TRIANGLE) {
+        printf("Figure triangle\n");
+        Vector(new, &a, &b, &c);
+        P_Triangle(&P, a, b, c);
+        S_Triangle(&S, a, b, c);
+        printf("S = %.3f\nP = %.3f\n", S, P);
+        printf("Coordinats:\n");
     }
-    B[i] = '\0';
-    if (!(strcmp(B, "triangle"))) {
-        new->type = TRIANGLE;
-    } else if (!(strcmp(B, "circle"))) {
-        new->type = CIRCLE;
-    } else {
-        printf("Unknown type\n");
-        return 1;
-    }
-    char* end;
-    end = A;
-    i = -1;
-    new->coordinates = (double*)malloc(sizeof(double) * 100);
-    if (new->coordinates == NULL) {
-        printf("Alloceted error");
-        return 1;
-    }
-    while (*A) {
-        new->coordinates[i] = strtod(A, &end);
-        A = end;
-        i++;
-        while (!(isdigit(*A) || *A == '-' || *A == '+') && *A) {
-            A++;
-        }
-    }
-    new->size = i;
-    return 0;
+    Print_Coordinats(new);
 }
 
-void S_And_P_Circle(double* S, double* P, Figure* new)
+void Print_Coordinats(Figure* new)
 {
-    double r = new->coordinates[2];
+    int j = 0;
+    while (j < new->size) {
+        printf("%d: %.2f\n", j + 1, new->c[j]);
+        j++;
+    }
+}
+
+void S_Circle(double* S, Figure* new)
+{
+    double r = new->c[2];
     *S = M_PI * (r * r);
+}
+
+void P_Circle(double* P, Figure* new)
+{
+    double r = new->c[2];
     *P = 2 * M_PI * r;
 }
 
-void S_And_P_Triangle(double* S, double* P, Figure* new)
+void Vector(Figure* new, double* a, double* b, double* c)
 {
-    double a
-            = sqrt(pow((new->coordinates[2] - new->coordinates[0]), 2.0)
-                   + pow((new->coordinates[3] - new->coordinates[1]), 2.0));
-    double b
-            = sqrt(pow((new->coordinates[4] - new->coordinates[2]), 2.0)
-                   + pow((new->coordinates[5] - new->coordinates[3]), 2.0));
-    double c
-            = sqrt(pow((new->coordinates[0] - new->coordinates[4]), 2.0)
-                   + pow((new->coordinates[1] - new->coordinates[5]), 2.0));
+    *a
+            = sqrt(pow((new->c[2] - new->c[0]), 2.0)
+                   + pow((new->c[3] - new->c[1]), 2.0));
+    *b
+            = sqrt(pow((new->c[4] - new->c[2]), 2.0)
+                   + pow((new->c[5] - new->c[3]), 2.0));
+    *c
+            = sqrt(pow((new->c[0] - new->c[4]), 2.0)
+                   + pow((new->c[1] - new->c[5]), 2.0));
+}
+
+void P_Triangle(double* P, double a, double b, double c)
+{
     *P = a + b + c;
+}
+
+void S_Triangle(double* S, double a, double b, double c)
+{
     double p = (a + b + c) / 2;
     *S = sqrt(p * (p - a) * (p - b) * (p - c));
 }
