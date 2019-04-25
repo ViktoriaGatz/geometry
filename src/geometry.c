@@ -116,6 +116,64 @@ void InSecTrTr(Figure* a, Figure* b, int a_1, int b_1)
     }
 }
 
+void InSecCirTr(Figure* a, Figure* b, int a_1, int b_1)
+{
+    if (a && b) {
+        int A1, B1, C1;
+        int A2, B2, C2;
+        int zn;
+        double x;
+        double y;
+        int bool;
+        if (a->type == CIRCLE || a->size == 3) {
+            if (b->type == TRIANGLE || b->size == 8) {
+                for (int i = 0; i < 6; i += 2) {
+                    A1 = a->c[2] * cos(0);
+                    B1 = a->c[2] * sin(0);
+                    C1 = pow(a->c[2], 2);
+                    A2 = b->c[1 + i] - b->c[3 + i],
+                    B2 = b->c[2 + i] - a->c[0 + i],
+                    C2 = -A2 * b->c[0 + i] - B2 * b->c[1 + i];
+                    zn = det(A1, B1, A2, B2);
+
+                    if (zn != 0) {
+                        x = -det(C1, B1, C2, B2) * 1. / zn;
+                        y = -det(A1, C1, A2, C2) * 1. / zn;
+
+                        bool = between(a->c[0 + i], a->c[2 + i], x)
+                                * between(a->c[1 + i], a->c[3 + i], y)
+                                * between(b->c[0 + i], b->c[2 + i], x)
+                                * between(b->c[1 + i], b->c[3 + i], y);
+                    }
+                    if (bool >= 1) {
+                        if ((det(A1, C1, A2, C2) == 0)
+                            && (det(B1, C1, B2, C2) == 0)) {
+                            if ((intersect_1(
+                                         a->c[0 + i],
+                                         a->c[2 + i],
+                                         b->c[0 + i],
+                                         b->c[2 + i])
+                                 * intersect_1(
+                                           a->c[1 + i],
+                                           a->c[3 + i],
+                                           b->c[3 + i],
+                                           b->c[3 + i]))
+                                == 1) {
+                                printf("Figure %d and %d "
+                                       "intersection\n",
+                                       (a_1 + 1),
+                                       (b_1 + 1));
+                            }
+                        }
+                    }
+                }
+            } else {
+                return;
+            }
+        }
+    }
+}
+
 void Work(Figure* new)
 {
     double S, P;
@@ -130,7 +188,7 @@ void Work(Figure* new)
         Vector(new, &a, &b, &c);
         P_Triangle(&P, a, b, c);
         S_Triangle(&S, a, b, c);
-        printf("S = %.3f\nP = %.12f\n", S, P);
+        printf("S = %.12f\nP = %.12f\n", S, P);
         printf("Coordinats:\n");
     }
     Print_Coordinats(new);

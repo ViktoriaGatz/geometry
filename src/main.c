@@ -46,7 +46,6 @@ int main()
     }
     // Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
     // Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
-    printf("SIZE: %d\n", size);
     for (i = 0; i < size; i++) {
         for (j = 0 + i; j < size; j++) {
             if (i != j) {
