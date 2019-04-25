@@ -13,11 +13,12 @@ int main()
         printf("No file\n");
         return 1;
     }
+    int i = 0;
+    int j = 0;
     printf("You input:\n");
     int capacity = 100;
     int size = 0;
     char arr[256];
-    int i = 0;
     Figure* new = (Figure*)malloc(sizeof(Figure) * capacity);
     if (new == NULL) {
         printf("Alloceted error\n");
@@ -40,6 +41,19 @@ int main()
             if (new == NULL) {
                 printf("Alloceted error\n");
                 return 1;
+            }
+        }
+    }
+    // Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    // Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    for (i = 0; i < size; i++) {
+        for (j = 0 + i; j < size; j++) {
+            if (i != j) {
+                // InSecTrTr(&a, &b, i, j);
+                InSecTrTr(&new[i], &new[j], i, j);
+                // InSecTrCir(&new[i], &new[j], i, j);
+                // InSecCirTr(&new[i], &new[j], i, j);
+                // InSecCirCir(&new[i], &new[j], i, j);
             }
         }
     }
