@@ -266,7 +266,6 @@ void Vector(Figure* new, double* a, double* b, double* c)
 void P_Triangle(double* P, double a, double b, double c)
 {
     if (P == NULL) {
-        *P = 0.0;
         return;
     }
     *P = a + b + c;
@@ -275,7 +274,6 @@ void P_Triangle(double* P, double a, double b, double c)
 void S_Triangle(double* S, double a, double b, double c)
 {
     if (S == NULL) {
-        *S = 0.0;
         return;
     }
     double p = (a + b + c) / 2;

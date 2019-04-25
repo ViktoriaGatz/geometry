@@ -355,7 +355,7 @@ CTEST(geometry, P_triangle_triangle_345)
 
     ASSERT_DBL_NEAR(expected_d, result_d);
 }
-/*
+
 CTEST(geometry, P_triangle_triangle_NULL)
 {
     // Given
@@ -369,11 +369,11 @@ CTEST(geometry, P_triangle_triangle_NULL)
     P_Triangle(NULL, a, b, c);
 
     // Then
-    const double expected_d = 0;
+    const double expected_d = 0.0;
 
     ASSERT_DBL_NEAR(expected_d, result_d);
 }
-*/
+
 CTEST(geometry, P_triangle_triangle_one_line)
 {
     // Given
@@ -500,7 +500,7 @@ CTEST(geometry, S_triangle_triangle_345)
 
     ASSERT_DBL_NEAR(expected_d, result_d);
 }
-/*
+
 CTEST(geometry, S_triangle_triangle_NULL)
 {
     // Given
@@ -514,11 +514,11 @@ CTEST(geometry, S_triangle_triangle_NULL)
     S_Triangle(NULL, a, b, c);
 
     // Then
-    const double expected_d = 0;
+    const double expected_d = 0.0;
 
     ASSERT_DBL_NEAR(expected_d, result_d);
 }
-*/
+
 CTEST(geometry, S_triangle_triangle_one_line)
 {
     // Given
