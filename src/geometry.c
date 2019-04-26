@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int min(int a, int b)
+int Min(int a, int b)
 {
     if (a < b)
         return a;
@@ -15,7 +15,7 @@ int min(int a, int b)
     return 0;
 }
 
-int max(int a, int b)
+int Max(int a, int b)
 {
     if (a < b)
         return b;
@@ -24,49 +24,51 @@ int max(int a, int b)
     return 0;
 }
 
-int det(int a, int b, int c, int d)
+int Det(int a, int b, int c, int d)
 {
     return a * d - b * c;
 }
 
-int between(int a, int b, double c)
+int Between(int a, int b, double c)
 {
     int exp_1;
     int exp_2;
-    if (min(a, b) <= c + EPS)
+    if (Min(a, b) <= c + EPS)
         exp_1 = 1;
     else
         exp_1 = 0;
-    if (c <= max(a, b) + EPS)
+    if (c <= Max(a, b) + EPS)
         exp_2 = 1;
     else
         exp_2 = 0;
     return exp_1 * exp_2;
 }
 
-void swap(int* a, int* b)
+void Swap(int* a, int* b)
 {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+    if (a && b) {
+        int tmp = *a;
+        *a = *b;
+        *b = tmp;
+    }
 }
 
-int intersect_1(int a, int b, int c, int d)
+int Intersect_1(int a, int b, int c, int d)
 {
     if (a > b)
-        swap(&a, &b);
+        Swap(&a, &b);
     if (c > d)
-        swap(&c, &d);
-    if (max(a, c) <= min(b, d))
+        Swap(&c, &d);
+    if (Max(a, c) <= Min(b, d))
         return 1;
-    if (max(a, c) > min(b, d))
+    if (Max(a, c) > Min(b, d))
         return 0;
     return 0;
 }
 
-void InSecTrTr(Figure* a, Figure* b, int a_1, int b_1)
+int InSecTrTr(Figure* a, Figure* b, int a_1, int b_1)
 {
-    if (a && b) {
+    if (a && b && a_1 >= 0 && b_1 >= 0) {
         int A1, B1, C1;
         int A2, B2, C2;
         int zn;
@@ -79,99 +81,45 @@ void InSecTrTr(Figure* a, Figure* b, int a_1, int b_1)
                 C1 = -A1 * a->c[0] - B1 * a->c[1];
                 A2 = b->c[1] - b->c[3], B2 = b->c[2] - a->c[0],
                 C2 = -A2 * b->c[0] - B2 * b->c[1];
-                zn = det(A1, B1, A2, B2);
+                zn = Det(A1, B1, A2, B2);
 
                 if (zn != 0) {
-                    x = -det(C1, B1, C2, B2) * 1. / zn;
-                    y = -det(A1, C1, A2, C2) * 1. / zn;
+                    x = -Det(C1, B1, C2, B2) * 1. / zn;
+                    y = -Det(A1, C1, A2, C2) * 1. / zn;
 
-                    bool = between(a->c[0], a->c[2], x)
-                            * between(a->c[1], a->c[3], y)
-                            * between(b->c[0], b->c[2], x)
-                            * between(b->c[1], b->c[3], y);
+                    bool = Between(a->c[0], a->c[2], x)
+                            * Between(a->c[1], a->c[3], y)
+                            * Between(b->c[0], b->c[2], x)
+                            * Between(b->c[1], b->c[3], y);
                     if (bool == 0) {
-                        return;
+                        // параллельны или совпадают
+                        return 1;
                     } else if (bool == 1) {
                         printf("Figure %d and %d intersection\n",
                                (a_1 + 1),
                                (b_1 + 1));
+                        return 0;
                     }
                 } else {
-                    if ((det(A1, C1, A2, C2) == 0)
-                        && (det(B1, C1, B2, C2) == 0)) {
-                        if ((intersect_1(a->c[0], a->c[2], b->c[0], b->c[2])
-                             * intersect_1(a->c[1], a->c[3], b->c[3], b->c[3]))
+                    if ((Det(A1, C1, A2, C2) == 0)
+                        && (Det(B1, C1, B2, C2) == 0)) {
+                        if ((Intersect_1(a->c[0], a->c[2], b->c[0], b->c[2])
+                             * Intersect_1(a->c[1], a->c[3], b->c[3], b->c[3]))
                             == 1) {
                             printf("Figure %d and %d "
                                    "intersection\n",
                                    (a_1 + 1),
                                    (b_1 + 1));
+                            return 0;
                         }
                     }
                 }
             }
         } else {
-            return;
+            return 1;
         }
     }
-}
-
-void InSecCirTr(Figure* a, Figure* b, int a_1, int b_1)
-{
-    if (a && b) {
-        int A1, B1, C1;
-        int A2, B2, C2;
-        int zn;
-        double x;
-        double y;
-        int bool;
-        if (a->type == CIRCLE || a->size == 3) {
-            if (b->type == TRIANGLE || b->size == 8) {
-                for (int i = 0; i < 6; i += 2) {
-                    A1 = a->c[2] * cos(0);
-                    B1 = a->c[2] * sin(0);
-                    C1 = pow(a->c[2], 2);
-                    A2 = b->c[1 + i] - b->c[3 + i],
-                    B2 = b->c[2 + i] - a->c[0 + i],
-                    C2 = -A2 * b->c[0 + i] - B2 * b->c[1 + i];
-                    zn = det(A1, B1, A2, B2);
-
-                    if (zn != 0) {
-                        x = -det(C1, B1, C2, B2) * 1. / zn;
-                        y = -det(A1, C1, A2, C2) * 1. / zn;
-
-                        bool = between(a->c[0 + i], a->c[2 + i], x)
-                                * between(a->c[1 + i], a->c[3 + i], y)
-                                * between(b->c[0 + i], b->c[2 + i], x)
-                                * between(b->c[1 + i], b->c[3 + i], y);
-                    }
-                    if (bool >= 1) {
-                        if ((det(A1, C1, A2, C2) == 0)
-                            && (det(B1, C1, B2, C2) == 0)) {
-                            if ((intersect_1(
-                                         a->c[0 + i],
-                                         a->c[2 + i],
-                                         b->c[0 + i],
-                                         b->c[2 + i])
-                                 * intersect_1(
-                                           a->c[1 + i],
-                                           a->c[3 + i],
-                                           b->c[3 + i],
-                                           b->c[3 + i]))
-                                == 1) {
-                                printf("Figure %d and %d "
-                                       "intersection\n",
-                                       (a_1 + 1),
-                                       (b_1 + 1));
-                            }
-                        }
-                    }
-                }
-            } else {
-                return;
-            }
-        }
-    }
+    return -1;
 }
 
 void Work(Figure* new)
@@ -196,6 +144,9 @@ void Work(Figure* new)
 
 void Print_Coordinats(Figure* new)
 {
+    if (new == NULL) {
+        return;
+    }
     int j = 0;
     while (j < new->size) {
         printf("%d: %.2f\n", j + 1, new->c[j]);

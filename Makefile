@@ -27,8 +27,8 @@ $(OBJ_DIR)/parser.o: $(SRC_DIR)/parser.c
 
 #gcc ./test/*.c ./src/geometry.c -lm -std=c11
 
-$(BIN_DIR)/testing: $(OBJ_TEST_DIR)/main.o $(OBJ_TEST_DIR)/parser.o $(OBJ_TEST_DIR)/geometry.o $(OBJ_DIR)/geometry.o
-	gcc $(OBJ_TEST_DIR)/main.o  $(OBJ_TEST_DIR)/geometry.o  $(OBJ_TEST_DIR)/parser.o $(OBJ_DIR)/geometry.o -o $(BIN_DIR)/testing -lm $(FLAG)
+$(BIN_DIR)/testing: $(OBJ_TEST_DIR)/main.o $(OBJ_TEST_DIR)/parser.o $(OBJ_TEST_DIR)/geometry.o $(OBJ_DIR)/geometry.o $(OBJ_DIR)/parser.o
+	gcc $(OBJ_TEST_DIR)/main.o  $(OBJ_TEST_DIR)/geometry.o  $(OBJ_TEST_DIR)/parser.o $(OBJ_DIR)/geometry.o $(OBJ_DIR)/parser.o -o $(BIN_DIR)/testing -lm $(FLAG)
 
 
 $(OBJ_TEST_DIR)/main.o: $(TEST_DIR)/main.c

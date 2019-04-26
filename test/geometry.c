@@ -648,3 +648,132 @@ CTEST(geometry, Vector_NULL5)
     // Then
 }
 /*----------------------------------------------------------------------------*/
+
+CTEST(geometry, Norm_InSecTrTr)
+{
+    Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(&b, &a, 0, 0);
+    // Then
+    const int expected = 0;
+
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(geometry, InSecTrTr_NULL_NORM)
+{
+    Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(NULL, &a, 0, 0);
+    // Then
+    const int expected = -1;
+
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(geometry, InSecTrTr_NORM_NULL)
+{
+    Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(&b, NULL, 0, 0);
+    // Then
+    const int expected = -1;
+
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(geometry, InSecTrTr_NULL_NULL)
+{
+    Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(NULL, NULL, 0, 0);
+    // Then
+    const int expected = -1;
+
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(geometry, InSecTrTr_NORM_NORM_minus_minus)
+{
+    Figure a = {TRIANGLE, {-1, 0, 1, 0}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(&b, &a, -1, -1);
+    // Then
+    const int expected = -1;
+
+    ASSERT_EQUAL(expected, result);
+}
+
+CTEST(geometry, InSecTrTr_parallel)
+{
+    Figure a = {TRIANGLE, {1, -1, 1, 1}, 8};
+    Figure b = {TRIANGLE, {0, -1, 0, 1}, 8};
+    // Given
+    int result = InSecTrTr(&b, &a, 0, 0);
+    // Then
+    const int expected = 1;
+
+    ASSERT_EQUAL(expected, result);
+}
+/*----------------------------------------------------------------------------*/
+
+CTEST(geometry, Swap_norm)
+{
+    int a = 4;
+    int b = 5;
+    int c = a;
+    int d = b;
+    // Given
+    Swap(&a, &b);
+    // Then
+
+    ASSERT_EQUAL(b, c);
+    ASSERT_EQUAL(a, d);
+}
+
+CTEST(geometry, Swap_NULL_norm)
+{
+    int a = 4;
+    int b = 5;
+    int c = a;
+    int d = b;
+    // Given
+    Swap(NULL, &b);
+    // Then
+
+    ASSERT_EQUAL(b, d);
+    ASSERT_EQUAL(a, c);
+}
+
+CTEST(geometry, Swap_norm_NULL)
+{
+    int a = 4;
+    int b = 5;
+    int c = a;
+    int d = b;
+    // Given
+    Swap(&a, NULL);
+    // Then
+
+    ASSERT_EQUAL(b, d);
+    ASSERT_EQUAL(a, c);
+}
+
+CTEST(geometry, Swap_NULL_NULL)
+{
+    int a = 4;
+    int b = 5;
+    int c = a;
+    int d = b;
+    // Given
+    Swap(NULL, NULL);
+    // Then
+
+    ASSERT_EQUAL(b, d);
+    ASSERT_EQUAL(a, c);
+}

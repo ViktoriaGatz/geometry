@@ -2,6 +2,7 @@
 #define PARSER_H
 #include "geometry.h"
 
+int Sumbol(char* arr);
 int Parser(Figure* new, char* A);
 int Coordinats(Figure* new, char* A);
 int Extra_sumbol(char* arr, int i);

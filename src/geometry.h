@@ -10,13 +10,13 @@ typedef struct {
 
 enum F { TRIANGLE = 1, CIRCLE = 2, POINT = 3 };
 
-int min(int a, int b);
-int max(int a, int b);
-int det(int a, int b, int c, int d);
-int between(int a, int b, double c);
-void swap(int* a, int* b);
-int intersect_1(int a, int b, int c, int d);
-void InSecTrTr(Figure* a, Figure* b, int a_1, int b_1);
+int Min(int a, int b);
+int Max(int a, int b);
+int Det(int a, int b, int c, int d);
+int Between(int a, int b, double c);
+void Swap(int* a, int* b);
+int Intersect_1(int a, int b, int c, int d);
+int InSecTrTr(Figure* a, Figure* b, int a_1, int b_1);
 void InSecTrCir(Figure* a, Figure* b, int a_1, int b_1);
 void InSecCirTr(Figure* a, Figure* b, int a_1, int b_1);
 void InSecCirCir(Figure* a, Figure* b, int a_1, int b_1);

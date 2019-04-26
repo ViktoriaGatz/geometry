@@ -70,7 +70,7 @@ int Punctuation_for_triangle(char* arr, int i)
             return 1;
         }
     } else {
-        printf("lacks or extra ','\n");
+        printf("lacks or extra ',' or '('\n");
         return 1;
     }
     return 0;
@@ -91,7 +91,7 @@ int Punctuation_for_circle(char* arr, int i)
             return 1;
         }
     } else {
-        printf("lacks or extra ','\n");
+        printf("lacks or extra ',' or '('\n");
         return 1;
     }
     return 0;
@@ -125,14 +125,28 @@ int Punctuation(char* arr)
     return 0;
 }
 
+int Sumbol(char* arr)
+{
+    for (int i = 0; arr[i] != '\0'; i++) {
+        if (!((arr[i] >= 'a' && arr[i] <= 'z')
+              || (arr[i] >= '0' && arr[i] <= '9') || arr[i] == ','
+              || arr[i] == '.' || arr[i] == ')' || arr[i] == ')'
+              || arr[i] == 'e')) {
+            return 1;
+        }
+        return 0;
+    }
+}
+
 int First_Character(char* arr)
 {
-    if (arr[0] > 'a' && arr[0] < 'z') {
-        if (Punctuation(arr)) {
+    if (arr[0] >= 'a' && arr[0] <= 'z') {
+        if (Punctuation(arr) || Sumbol(arr)) {
             return 1;
         }
     } else {
         printf("Error in the first character.\n");
+        return 1;
     }
     return 0;
 }
